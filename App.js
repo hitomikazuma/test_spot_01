@@ -1,34 +1,32 @@
 import React from 'react';
-import { AppLoading, Font, Asset } from 'expo';
-import { View } from 'react-native';
+import {AppLoading, Font, Asset, Constants} from 'expo';
 
 import fonts from 'app/src/fonts'
 import images from 'app/src/images'
 
-import MainTabNavigator from 'app/src/navigation/MainTabNavigator';
-import RootNavigation from 'app/src/navigation/RootNavigation';
+import Navigation from 'app/src/navigation/AppNavigator';
 
 export default class App extends React.Component {
 
   static defaultProps = {
     skipLoadingScreen: false
-  }
+  };
 
   state = {
     isLoadingComplete: false
-  }
+  };
 
   loadResourcesAsync = async () => {
     await Asset.loadAsync(Object.keys(images).map(key => images[key]));
     await Font.loadAsync(fonts);
     return true;
-  }
+  };
 
   render() {
     const { isLoadingComplete } = this.state;
     const { skipLoadingScreen } = this.props;
 
-    if (!isLoadingComplete && !skipLoadingScreen) {
+    if(!isLoadingComplete && !skipLoadingScreen) {
       return (
         <AppLoading
           startAsync={this.loadResourcesAsync}
@@ -37,8 +35,6 @@ export default class App extends React.Component {
         />
       );
     }
-    return(
-      <RootNavigation />
-    );
+    return <Navigation />;
   }
 }

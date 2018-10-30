@@ -11,22 +11,47 @@ const SecondRoute = () => (
   <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
 );
 
+const ThirdRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#8bb745' }]} />
+);
+
+const FourthRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#b72123' }]} />
+);
+
+const FifthRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#46abb7' }]} />
+);
+
 export default class TabViewExample extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'First' },
-      { key: 'second', title: 'Second' },
+      { key: 'first', title: 'あいうえお' },
+      { key: 'second', title: 'かきくけこさしすせそ' },
+      { key: 'third', title: 'たちつてと' },
+      { key: 'fourth', title: 'なにぬねの' },
+      { key: 'fifth', title: 'なにぬねの' },
     ],
   };
 
   _handleIndexChange = index => this.setState({ index });
 
-  _renderTabBar = props => <TabBar {...props} style={styles.header} />;
+  _renderTabBar = props => (
+    <TabBar
+      {...props}
+      style={styles.header}
+      scrollEnable
+      tabStyle={{padding: 0, width: 100}}
+    />
+  );
 
   _renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
+    third: ThirdRoute,
+    fourth: FourthRoute,
+    fifth: FifthRoute,
   });
 
   render() {
@@ -50,5 +75,6 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#000'
   },
 });

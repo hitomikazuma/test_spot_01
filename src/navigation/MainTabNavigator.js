@@ -1,4 +1,3 @@
-import { Constants } from 'expo';
 import { createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 

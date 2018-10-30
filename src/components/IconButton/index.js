@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { Constants } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
+/* from app */
 import styles from './styles';
 
 export default class IconButton extends React.Component {

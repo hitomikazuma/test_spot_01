@@ -67,34 +67,36 @@ class HomeScreen07 extends React.Component {
   }
 }
 
-const HomeTab = createMaterialTopTabNavigator({
-  Tab1: HomeScreen,
-  Tab2: HomeScreen02,
-  Tab3: HomeScreen03,
-  Tab4: HomeScreen04,
-  Tab5: HomeScreen05,
-  Tab6: HomeScreen06,
-  Tab7: HomeScreen07,
-}, {
-  tabBarOptions: {
-    scrollEnabled: true,
-    labelStyle: {
-      fontSize: 12,
-    },
-    tabStyle: {
-      width: Dimensions.get('window').width / 4,
-    },
-    style: {
-      backgroundColor: 'tomato',
-    },
-    indicatorStyle: {
-      backgroundColor: '#fff'
-    }
+const HomeTab = createMaterialTopTabNavigator(
+  {
+    Tab1: HomeScreen,
+    Tab2: HomeScreen02,
+    Tab3: HomeScreen03,
+    Tab4: HomeScreen04,
+    Tab5: HomeScreen05,
+    Tab6: HomeScreen06,
+    Tab7: HomeScreen07,
   },
-});
+  {
+    tabBarOptions: {
+      scrollEnabled: true,
+      labelStyle: {
+        fontSize: 12,
+      },
+      tabStyle: {
+        width: Dimensions.get('window').width / 4,
+      },
+      style: {
+        backgroundColor: 'tomato',
+      },
+      indicatorStyle: {
+        backgroundColor: '#fff'
+      }
+    },
+  });
 
 HomeTab.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const HomeTabStack = createStackNavigator({
@@ -110,6 +112,9 @@ export default AppNavigator =  createBottomTabNavigator(
   },
   {
     navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
@@ -124,7 +129,7 @@ export default AppNavigator =  createBottomTabNavigator(
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
         return <Ionicons name={iconName} size={25} color={tintColor} />;
-      },
+      }
     }),
     tabBarOptions: {
       activeTintColor: 'tomato',

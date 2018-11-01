@@ -1,75 +1,42 @@
 import React from 'react';
-import { Text, View, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import { createStackNavigator, createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation';
-import { Ionicons } from '@expo/vector-icons';
 
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>HomeScreen</Text>
-      </View>
-    );
-  }
-}
-class HomeScreen02 extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>DetailScreen</Text>
-      </View>
-    );
-  }
-}
-class HomeScreen03 extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>SettingScreen</Text>
-      </View>
-    );
-  }
-}
-class HomeScreen04 extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>SettingScreen</Text>
-      </View>
-    );
-  }
-}
-class HomeScreen05 extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>SettingScreen</Text>
-      </View>
-    );
-  }
-}
-class HomeScreen06 extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>SettingScreen</Text>
-      </View>
-    );
-  }
-}
-class HomeScreen07 extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>SettingScreen</Text>
-      </View>
-    );
-  }
-}
+import { HomeTabIcon, SearchTabIcon, MeTabIcon } from 'app/src/components/Tab';
 
-const HomeTab = createMaterialTopTabNavigator(
+import HomeScreen01 from 'app/src/screens/Home/HomeScreen01';
+import HomeScreen02 from 'app/src/screens/Home/HomeScreen02';
+import HomeScreen03 from 'app/src/screens/Home/HomeScreen03';
+import HomeScreen04 from 'app/src/screens/Home/HomeScreen04';
+import HomeScreen05 from 'app/src/screens/Home/HomeScreen05';
+import HomeScreen06 from 'app/src/screens/Home/HomeScreen06';
+import HomeScreen07 from 'app/src/screens/Home/HomeScreen07';
+
+const createTabStack = (title, screen) => createStackNavigator(
   {
-    Tab1: HomeScreen,
+    [title]: { screen },
+  },
+  {
+    navigationOptions: {
+      title: 'SPOT',
+      headerTitleStyle :{
+        letterSpacing: 3,
+        textAlign: 'center',
+        alignSelf:'center',
+        fontSize: 24,
+        color: '#fff'
+      },
+      headerStyle:{
+        backgroundColor:'#111',
+        borderBottomWidth: 0,
+      },
+    }
+  }
+);
+
+const Home = createMaterialTopTabNavigator(
+  {
+    Tab1: HomeScreen01,
     Tab2: HomeScreen02,
     Tab3: HomeScreen03,
     Tab4: HomeScreen04,
@@ -81,59 +48,52 @@ const HomeTab = createMaterialTopTabNavigator(
     tabBarOptions: {
       scrollEnabled: true,
       labelStyle: {
-        fontSize: 12,
+        fontSize: 16,
       },
       tabStyle: {
-        width: Dimensions.get('window').width / 4,
+        width: Dimensions.get('window').width / 3,
       },
       style: {
-        backgroundColor: 'tomato',
+        backgroundColor: '#111',
       },
       indicatorStyle: {
-        backgroundColor: '#fff'
+        height: 3,
+        backgroundColor: '#C1FF00'
       }
     },
   });
 
-HomeTab.navigationOptions = {
-  header: null,
-};
-
-const HomeTabStack = createStackNavigator({
-  Home: HomeTab,
-  Detail: HomeScreen02,
-});
-
-export default AppNavigator =  createBottomTabNavigator(
+const AppNavigator =  createBottomTabNavigator(
   {
-    Home: HomeTabStack,
-    Setting: HomeScreen02,
-    Profile: HomeScreen03,
+    Home:
+      {
+        screen: createTabStack('Home', Home),
+        navigationOptions: () => ({
+          tabBarIcon: HomeTabIcon,
+        }),
+      },
+    Search: {
+      screen: createTabStack('Search', HomeScreen02),
+      navigationOptions: () => ({
+        tabBarIcon: SearchTabIcon,
+      }),
+    },
+    Profile: {
+      screen: createTabStack('Profile', HomeScreen03),
+      navigationOptions: () => ({
+        tabBarIcon: MeTabIcon,
+      })
+    }
   },
   {
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      },
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
-        let iconName;
-        if (routeName === 'Home') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Setting') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Profile') {
-          iconName = `ios-person${focused ? '' : '-outline'}`;
-        }
-
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
-      }
-    }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#C1FF00',
+      inactiveTintColor: '#fff',
+      style: {
+        backgroundColor: '#111',
+      },
     },
   }
 );
+
+export default AppNavigator;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar, Platform, View } from 'react-native';
 import {AppLoading, Font, Asset, Constants} from 'expo';
 
 import fonts from 'app/src/fonts'
@@ -7,6 +8,14 @@ import images from 'app/src/images'
 import Navigation from 'app/src/navigation/AppNavigator';
 
 export default class App extends React.Component {
+
+  static navigationOptions = {
+    title: 'REGISTRATION',
+    headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
+    headerStyle:{
+      backgroundColor:'#111',
+    },
+  };
 
   static defaultProps = {
     skipLoadingScreen: false
@@ -35,6 +44,11 @@ export default class App extends React.Component {
         />
       );
     }
-    return <Navigation />;
+    return(
+      <View style={{ flex: 1 }}>
+        {Platform.OS === 'ios' && <StatusBar backgroundColor="#111" barStyle="light-content" />}
+        <Navigation />
+      </View>
+    );
   }
 }

@@ -2,7 +2,7 @@ import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   icon: {
-    marginBottom: -3,
+    marginBottom: -10,
   },
   takeTab: {
     flex: 1,
